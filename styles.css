@@ -7,7 +7,7 @@ body{
 
 #header
 {
-    height:200vh;
+    height:100vh;
     background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(https://drive.google.com/uc?id=1zlbUIyXND3OG6VMxoolgF4EJ6-bwJYAJ);
     background-position: center;
     background-size: cover;
@@ -193,6 +193,7 @@ font-size: 14px;
     font-size: 20px;
 }
 .container h1{
+   padding-top:60px;
     font-size: 34px;
     font-weight: 600;
     
@@ -212,6 +213,10 @@ font-size: 14px;
     background-attachment: fixed;   
     color: #fff;
 }
+.contact h1{
+padding-top:100px;	
+}
+
 .contact .row{
     padding:30px 0 ;
     font-size: 22px;
