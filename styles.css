@@ -7,8 +7,8 @@ body{
 
 #header
 {
-    height:100vh;
-    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(img/032.jpg);
+    height:200vh;
+    background: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(https://drive.google.com/uc?id=1zlbUIyXND3OG6VMxoolgF4EJ6-bwJYAJ);
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
@@ -206,7 +206,7 @@ font-size: 14px;
 .contact{
  
     padding-top: 10 0px;
-    background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)),url(img/ll.jpg);
+    background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.6)),url(https://drive.google.com/uc?id=18XUB2zy7kQjfGU2TkrT7ESPIhXjwfkxK);
     background-position: center;
     background-size: cover;
     background-attachment: fixed;   
