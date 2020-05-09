@@ -4,5 +4,5 @@ https://shaxpy.github.io/CV/
 ## Heroku 
 https://shaxpy.herokuapp.com/
 
-**PS- Credits for smooth-scroll.js file goes to https://github.com/cferdinandi/smooth-scroll/blob/master/dist/smooth-scroll.js \
+**PS- Credits for smooth-scroll.js file goes to https://github.com/cferdinandi \
 Rest is me!**
