@@ -3,3 +3,6 @@ I used a trick to deploy my HTML, CSS based Static website on Heroku -
 https://shaxpy.github.io/CV/
 ## Heroku 
 https://shaxpy.herokuapp.com/
+
+**PS- Credits for smooth-scroll.js file goes to https://github.com/cferdinandi/smooth-scroll/blob/master/dist/smooth-scroll.js \
+Rest is me!**
