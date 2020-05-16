@@ -3,6 +3,9 @@ body{
     padding:0 ;
     font-family: sans-serif;
 }
+html {
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
 
 
 #header
@@ -228,25 +231,62 @@ padding-top:100px;
     margin: 5px;
     border-radius: 30px;
     border: 2px solid #fff;
-    background: transparent;
+    background: transparent !important;
+    color:white;
+}
+.container .btn{
+    padding:10px 25px 10px 25px;
+    margin: 10px;
+    border-radius: 40px;
+    /* border: 2px solid #fff; */
+    /* background: black !important; */
+    color:black !important;
+    font-weight: 300;
+    outline: 0 !important;
+    border:0 none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    
 }
 .contact .btn:focus{
 box-shadow: one !important;
+}
+.container .btn:focus{
+    box-shadow: one !important;
 }
 .contact .btn:hover{
     border: 2px solid #000 !important;
     background: #000 !important;
     transition: 0.6s;
 }
+.container .btn:hover{
+    border: 1px solid #000 !important;
+    background: black !important ;
+    transition: 0.4s;
+    outline: 0 !important;
+    border:0 none !important;
+    font-size: 30px;
+    -webkit-tap-highlight-color: transparent !important;
+}
 .contact .btn .fa{
     margin-right: 10px;
-
 }
+.row .btn .fa{
+    outline: 0 !important;
+    border:0 none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+/* .col-md-6 .fa-rocket{
+    color:white;
+}
+.col-md-6 .fa-reply{
+    color:white;
+}
+.col-md-6 .fa-reply-all{
+    color:white;
+} */
 .col-md-6 .fa{
 
     font-size: 35px;
-  
-
 }
 .footer{
     background: #000;
@@ -267,7 +307,7 @@ box-shadow: one !important;
 } */
 
 .social-icons ul li{
-    height: 40px;
+    height: 50px;
     width: 60px;
     list-style-type: none;
     padding-left:12px;
@@ -278,7 +318,9 @@ box-shadow: one !important;
 }
 .social-icons ul li:hover{
     padding-left: 20px;
-    width: 120px;
-    transition: 0.5s;
+    width: 150px;
+    transition: 0.4s;
 }
+
+
 
