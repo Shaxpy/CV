@@ -6,6 +6,18 @@
     <title>Shashwat Pandey | Edge AI & Robotics Specialist</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#0d1117',
+                        primary: '#14B8A6',
+                    }
+                }
+            }
+        }
+    </script>
     <!-- Load Lucide Icons -->
     <script type="module" src="https://unpkg.com/lucide@latest"></script>
     <!-- Load AOS for scroll animations -->
@@ -17,22 +29,138 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
     
     <style>
+        /* CSS Custom Properties */
         :root {
-            --primary-color: #14B8A6; /* Tailwind teal-500 */
-            --secondary-color: #0EA5E9; /* Tailwind blue-500 */
-            --accent-color: #8B5CF6; /* Tailwind violet-500 */
+            --primary-color: #14B8A6;
+            --secondary-color: #0EA5E9;
+            --accent-color: #8B5CF6;
             --card-tilt-amount: 10deg;
+            --text-primary: #ffffff;
+            --text-body: #e5e7eb;
+            --text-muted: #9ca3af;
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
         }
-        
-        /* Tech Stack Icons Styling */
+
+        /* Base Document Setup */
+        html {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-body);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-primary) !important;
+        }
+
+        p, li, span, div:not([class*="bg-"]) {
+            color: var(--text-body) !important;
+        }
+
+        /* Link Styles */
+        a {
+            position: relative;
+            z-index: 10;
+            cursor: pointer !important;
+            pointer-events: auto !important;
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:not([class]) {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        /* Header Navigation */
+        header nav a {
+            color: var(--text-body) !important;
+            text-decoration: none;
+            z-index: 50;
+        }
+
+        header nav a:hover {
+            color: var(--primary-color) !important;
+        }
+
+        /* Card Components */
+        .card {
+            color: var(--text-body) !important;
+            background-color: var(--bg-card);
+            transition: all 0.3s ease-out;
+            border: 1px solid rgba(20, 184, 166, 0.1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px) rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg));
+            box-shadow: 0 10px 20px rgba(20, 184, 166, 0.2);
+        }
+
+        .card a {
+            position: relative;
+            z-index: 15;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .card h3 {
+            color: var(--primary-color) !important;
+        }
+
+        /* Utility Classes */
+        .text-accent {
+            color: var(--primary-color) !important;
+        }
+
+        .text-white {
+            color: var(--text-primary) !important;
+        }
+
+        .text-gray-300 {
+            color: var(--text-body) !important;
+        }
+
+        .text-gray-400 {
+            color: var(--text-muted) !important;
+        }
+
+        .bg-accent {
+            background-color: var(--primary-color);
+        }
+
+        .border-accent {
+            border-color: var(--primary-color);
+        }
+
+        /* Section Styles */
+        .section-heading {
+            color: var(--text-primary);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Tech Stack Icons */
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
             margin-top: 1rem;
         }
-        
+
         .tech-icon {
+            position: relative;
             width: 2.5rem;
             height: 2.5rem;
             padding: 0.5rem;
@@ -40,18 +168,13 @@
             background: rgba(255, 255, 255, 0.05);
             transition: all 0.3s ease;
         }
-        
+
         .tech-icon:hover {
             transform: translateY(-3px);
             background: rgba(20, 184, 166, 0.1);
             box-shadow: 0 4px 12px rgba(20, 184, 166, 0.2);
         }
-        
-        /* Custom tooltip styles */
-        .tech-icon {
-            position: relative;
-        }
-        
+
         .tech-icon[title]:hover::after {
             content: attr(title);
             position: absolute;
@@ -69,93 +192,34 @@
             margin-bottom: 5px;
             border: 1px solid rgba(20, 184, 166, 0.3);
         }
-        
-        /* FIX: Ensure scrolling is always enabled on the main document */
-        html {
-            height: 100%;
-            overflow-x: hidden;
-            overflow-y: scroll; /* Explicitly allow vertical scrolling */
-        }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d1117;
-            color: #e5e7eb;
-            scroll-behavior: smooth;
-            /* Removed overflow-x: hidden from body since it's on html now */
-            overflow-x: hidden; /* Re-added to body to ensure compatibility */
-        }
-        .text-accent {
-            color: var(--primary-color);
-        }
-        .bg-accent {
-            background-color: var(--primary-color);
-        }
-        .border-accent {
-            border-color: var(--primary-color);
-        }
-        .section-heading {
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-        }
-        .card {
-            background-color: #161b22;
-            transition: all 0.3s ease-out;
-            border: 1px solid rgba(20, 184, 166, 0.1);
-            transform-style: preserve-3d;
-            perspective: 1000px;
-        }
-        .card:hover {
-            transform: translateY(-5px) rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg));
-            box-shadow: 0 10px 20px rgba(20, 184, 166, 0.2);
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            background: radial-gradient(
-                800px circle at var(--mouse-x) var(--mouse-y), 
-                rgba(20, 184, 166, 0.1),
-                transparent 40%
-            );
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .card:hover::before {
-            opacity: 1;
-        }
-        
-        /* Custom animations */
+        /* Animations */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
+
         .floating {
             animation: float 6s ease-in-out infinite;
         }
-        
-        /* Skill bars */
-        .skill-bar {
-            height: 8px;
-            background-color: #1f2937;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 8px;
+
+        @keyframes skillFlash {
+            0% { box-shadow: 0 0 15px 5px rgba(20, 184, 166, 0.8); }
+            50% { box-shadow: 0 0 5px 1px rgba(20, 184, 166, 0.2); }
+            100% { box-shadow: 0 0 15px 5px rgba(20, 184, 166, 0.8); }
         }
-        .skill-progress {
-            height: 100%;
-            border-radius: 4px;
-            /* Initial width set to 0% for animation effect */
-            width: 0;
-            transition: width 1.5s ease-in-out;
+
+        .highlight-skill {
+            animation: skillFlash 1.5s 3;
+            box-shadow: 0 0 15px 5px var(--primary-color) !important;
         }
-        
-        /* Circuit board background */
+
+        /* Background Effects */
         .circuit-bg {
             position: relative;
             overflow: hidden;
         }
+
         .circuit-bg::before {
             content: "";
             position: absolute;
@@ -170,44 +234,56 @@
             animation: circuitMove 20s linear infinite;
             z-index: -1;
         }
+
         @keyframes circuitMove {
             0% { transform: translateX(0); }
             100% { transform: translateX(-40px); }
         }
-        
-        /* Neural network animation */
+
         .neural-network {
-            position: fixed; /* Changed to fixed to cover viewport */
+            position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
             z-index: -2;
             opacity: 0.1;
-            pointer-events: none; /* Important to allow interaction with content */
+            pointer-events: none;
         }
 
-        /* 3D Cube Container */
+        /* Component Specific */
         #cubeContainer {
             width: 120px;
             height: 120px;
             margin: 0 auto 1.5rem;
             position: relative;
         }
+
         .hero-title {
             position: relative;
             z-index: 10;
         }
 
-        /* NEW: Highlight animation for skill linking */
-        .highlight-skill {
-            animation: skillFlash 1.5s 3; /* Flash 3 times */
-            box-shadow: 0 0 15px 5px var(--primary-color) !important;
+        [data-lucide] {
+            stroke: currentColor;
+            fill: none;
+            color: inherit;
         }
-        @keyframes skillFlash {
-            0% { box-shadow: 0 0 15px 5px rgba(20, 184, 166, 0.8) !important; }
-            50% { box-shadow: 0 0 5px 1px rgba(20, 184, 166, 0.2) !important; }
-            100% { box-shadow: 0 0 15px 5px rgba(20, 184, 166, 0.8) !important; }
+
+        /* Skill Bars */
+        .skill-bar {
+            height: 8px;
+            background-color: #1f2937;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
         }
     </style>
 </head>
@@ -220,7 +296,7 @@
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <a href="#hero" class="text-xl font-bold text-accent tracking-wider flex items-center">
                 <i data-lucide="scan-line" class="w-6 h-6 mr-2 floating" style="animation-delay: 0.5s;"></i>
-                SHASHWAT P.
+                Portfolio
             </a>
             <div class="flex space-x-6 text-sm font-medium">
                 <a href="#about" class="hover:text-primary transition duration-150">About</a>
@@ -228,7 +304,7 @@
                 <a href="#experience" class="hover:text-primary transition duration-150">Experience</a>
                 <a href="#projects" class="hover:text-primary transition duration-150">Projects</a>
                 <a href="#research" class="hover:text-primary transition duration-150">Research</a>
-                <a href="mailto:shashwatpandey28@gmail.com" class="text-white hover:text-primary transition duration-150 flex items-center">
+                <a href="mailto:shashwatpandey28@gmail.com" target="_blank" rel="noopener noreferrer" class="text-white hover:text-primary transition duration-150 flex items-center">
                     <i data-lucide="mail" class="w-4 h-4 mr-1"></i>Contact
                 </a>
             </div>
@@ -253,10 +329,10 @@
                     View Key Projects
                 </a>
                 <div class="flex space-x-4">
-                    <a href="https://linkedin.com/in/shaxpy28" target="_blank" class="inline-flex items-center px-6 py-3 border-2 border-gray-600 text-lg font-semibold rounded-lg text-white hover:border-accent hover:text-accent transition duration-300">
+                    <a href="https://linkedin.com/in/shaxpy28" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border-2 border-gray-600 text-lg font-semibold rounded-lg text-white hover:border-accent hover:text-accent transition duration-300">
                         <i data-lucide="linkedin" class="w-5 h-5 mr-2"></i> LinkedIn
                     </a>
-                    <a href="https://github.com/shaxpy" target="_blank" class="inline-flex items-center px-6 py-3 border-2 border-gray-600 text-lg font-semibold rounded-lg text-white hover:border-accent hover:text-accent transition duration-300">
+                    <a href="https://github.com/shaxpy" target="_blank" rel="noopener noreferrer" class="inline-flex items-center px-6 py-3 border-2 border-gray-600 text-lg font-semibold rounded-lg text-white hover:border-accent hover:text-accent transition duration-300">
                         <i data-lucide="github" class="w-5 h-5 mr-2"></i> GitHub
                     </a>
                 </div>
@@ -302,8 +378,8 @@
                     </div>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kelo-ros2')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>ROS1 / ROS2 (Migration, SLAM, TF)</span>
+                            <button onclick="scrollToAndHighlightSkill('kelo-ros2')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>ROS1 / ROS2 (Migration, SLAM, TF)</span></button>
                             </a>
                             <span>95%</span>
                         </li>
@@ -311,8 +387,8 @@
                             <div class="skill-progress bg-accent" data-progress="95"></div>
                         </div>
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kelo-ros2')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>C++</span>
+                            <button onclick="scrollToAndHighlightSkill('kelo-ros2')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>C++</span></button>
                             </a>
                             <span>90%</span>
                         </li>
@@ -320,8 +396,8 @@
                             <div class="skill-progress bg-accent" data-progress="90"></div>
                         </div>
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('sick-ai')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>Python</span>
+                            <button onclick="scrollToAndHighlightSkill('sick-ai')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>Python</span></button>
                             </a>
                             <span>95%</span>
                         </li>
@@ -343,8 +419,8 @@
                     </div>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('trumpf-cv')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>PyTorch</span>
+                            <button onclick="scrollToAndHighlightSkill('trumpf-cv')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>PyTorch</span></button>
                             </a>
                             <span>90%</span>
                         </li>
@@ -352,8 +428,8 @@
                             <div class="skill-progress bg-accent" data-progress="90"></div>
                         </div >
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('trumpf-cv')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>TensorFlow</span>
+                            <button onclick="scrollToAndHighlightSkill('trumpf-cv')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>TensorFlow</span></button>
                             </a>
                             <span>85%</span>
                         </li >
@@ -361,8 +437,8 @@
                             <div class="skill-progress bg-accent" data-progress="85"></div>
                         </div>
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kritikal-3d')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>TensorRT & ONNX</span>
+                            <button onclick="scrollToAndHighlightSkill('kritikal-3d')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>TensorRT & ONNX</span></button>
                             </a>
                             <span>80%</span>
                         </li>
@@ -383,8 +459,8 @@
                     </div>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('trumpf-cv')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>Object Detection & Segmentation</span>
+                            <button onclick="scrollToAndHighlightSkill('trumpf-cv')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>Object Detection & Segmentation</span></button>
                             </a>
                             <span>90%</span>
                         </li>
@@ -392,8 +468,8 @@
                             <div class="skill-progress bg-accent" data-progress="90"></div>
                         </div>
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kritikal-3d')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>6D Pose Estimation / SfM</span>
+                            <button onclick="scrollToAndHighlightSkill('kritikal-3d')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>6D Pose Estimation / SfM</span></button>
                             </a>
                             <span>85%</span>
                         </li>
@@ -401,8 +477,8 @@
                             <div class="skill-progress bg-accent" data-progress="85"></div>
                         </div>
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kritikal-3d')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>OpenCV & Open3D (ICP)</span>
+                            <button onclick="scrollToAndHighlightSkill('kritikal-3d')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>OpenCV & Open3D (ICP)</span></button>
                             </a>
                             <span>95%</span>
                         </li>
@@ -424,8 +500,8 @@
                     </div>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kritikal-3d')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>NVIDIA Jetson / Deepstream</span>
+                            <button onclick="scrollToAndHighlightSkill('kritikal-3d')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>NVIDIA Jetson / Deepstream</span></button>
                             </a>
                             <span>85%</span>
                         </li>
@@ -433,8 +509,8 @@
                             <div class="skill-progress bg-accent" data-progress="85"></div>
                         </div>
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('trumpf-cv')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>Raspberry Pi & Embedded C</span>
+                            <button onclick="scrollToAndHighlightSkill('trumpf-cv')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>Raspberry Pi & Embedded C</span></button>
                             </a>
                             <span>80%</span>
                         </li>
@@ -442,8 +518,8 @@
                             <div class="skill-progress bg-accent" data-progress="80"></div>
                         </div>
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('sick-ai')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>AI Accelerators / ATmega</span>
+                            <button onclick="scrollToAndHighlightSkill('sick-ai')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>AI Accelerators / ATmega</span></button>
                             </a>
                             <span>75%</span>
                         </li>
@@ -464,8 +540,8 @@
                     </div>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('sick-ai')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>3D Time-of-Flight (ToF)</span>
+                            <button onclick="scrollToAndHighlightSkill('sick-ai')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>3D Time-of-Flight (ToF)</span></button>
                             </a>
                             <span>85%</span>
                         </li>
@@ -473,8 +549,8 @@
                             <div class="skill-progress bg-accent" data-progress="85"></div>
                         </div>
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('swift-ros')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>LiDAR / Intel RealSense</span>
+                            <button onclick="scrollToAndHighlightSkill('swift-ros')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>LiDAR / Intel RealSense</span></button>
                             </a>
                             <span>80%</span>
                         </li>
@@ -482,8 +558,8 @@
                             <div class="skill-progress bg-accent" data-progress="80"></div>
                         </div>
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kritikal-3d')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>Multi-camera Synchronization</span>
+                            <button onclick="scrollToAndHighlightSkill('kritikal-3d')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>Multi-camera Synchronization</span></button>
                             </a>
                             <span>85%</span>
                         </li>
@@ -504,8 +580,8 @@
                     </div>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kelo-ros2')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>Docker & Containerization</span>
+                            <button onclick="scrollToAndHighlightSkill('kelo-ros2')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>Docker & Containerization</span></button>
                             </a>
                             <span>85%</span>
                         </li>
@@ -513,8 +589,8 @@
                             <div class="skill-progress bg-accent" data-progress="85"></div>
                         </div>
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('trumpf-cv')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>CI/CD Practices</span>
+                            <button onclick="scrollToAndHighlightSkill('trumpf-cv')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>CI/CD Practices</span></button>
                             </a>
                             <span>80%</span>
                         </li>
@@ -522,8 +598,8 @@
                             <div class="skill-progress bg-accent" data-progress="80"></div>
                         </div>
                         <li class="flex justify-between items-center">
-                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('sick-ai')" class="hover:text-accent hover:underline cursor-pointer">
-                                <span>Linux/Ubuntu & Bash</span>
+                            <button onclick="scrollToAndHighlightSkill('sick-ai')" class="text-inherit hover:text-accent hover:underline cursor-pointer bg-transparent border-none p-0 text-left w-full flex items-center">
+                                <span>Linux/Ubuntu & Bash</span></button>
                             </a>
                             <span>90%</span>
                         </li>
@@ -560,7 +636,7 @@
                 <!-- Job 2: TRUMPF GmbH + Co. KG -->
                 <div class="card p-8 rounded-xl border-t-4 border-gray-600" data-aos="fade-left" id="trumpf-cv">
                     <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-2xl font-bold text-white">Computer Vision Software Engineer</h3>
+                        <h3 class="text-2xl font-bold text-white">Computer Vision Intern (Full-time)</h3>
                         <span class="text-sm font-medium text-gray-400">Ditzingen, Germany | Mar 2025 - Aug 2025</span>
                     </div>
                     <p class="text-lg text-gray-400 mb-4">TRUMPF GmbH + Co. KG</p>
@@ -629,8 +705,8 @@
                     <h3 class="text-xl font-bold text-accent mb-2 flex items-center"><i data-lucide="route" class="w-5 h-5 mr-2"></i> Person Following Mobile Robot (ROS2)</h3>
                     <p class="text-sm text-gray-400 mb-4">Sep 2023 - Jan 2024</p>
                     <p class="text-gray-300 mb-4">A complete <span class="text-accent">ROS2-based system</span> for person following and obstacle avoidance. Utilized <span class="text-accent">Intel RealSense D455</span> for sensor fusion (RGB+Depth), pose estimation, and safety maintenance.</p>
-                    <a href="#" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
-                        <i data-lucide="github" class="w-4 h-4 mr-1"></i> View Code / Details (Link Placeholder)
+                    <a href="https://github.com/HBRS-SDP/ws23-person-following/tree/main" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
+                        <i data-lucide="github" class="w-4 h-4 mr-1"></i> Github Repository
                     </a>
                 </div>
 
@@ -639,8 +715,8 @@
                     <h3 class="text-xl font-bold text-accent mb-2 flex items-center"><i data-lucide="waves" class="w-5 h-5 mr-2"></i> AI-based Anomaly Detection (Audio)</h3>
                     <p class="text-sm text-gray-400 mb-4">Dec 2023 - Jan 2024</p>
                     <p class="text-gray-300 mb-4">Developed an anomaly detection system using <span class="text-accent">autoencoders</span> on audio features. Achieved <span class="text-accent">95.8% accuracy</span> via reconstruction error, ideal for predictive maintenance.</p>
-                    <a href="#" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
-                        <i data-lucide="github" class="w-4 h-4 mr-1"></i> View Code / Details (Link Placeholder)
+                    <a href="https://github.com/Shaxpy/AKoS_Audio_classifier" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
+                        <i data-lucide="github" class="w-4 h-4 mr-1"></i> Github Repository
                     </a>
                 </div>
 
@@ -649,8 +725,8 @@
                     <h3 class="text-xl font-bold text-accent mb-2 flex items-center"><i data-lucide="award" class="w-5 h-5 mr-2"></i> Winner Project: IBM Hack Challenge</h3>
                     <p class="text-sm text-gray-400 mb-4">Aug 2021 - Oct 2021</p>
                     <p class="text-gray-300 mb-4">Developed a web app with an intelligent recommendation engine for OTT platforms, integrating real-time genre analytics and a <span class="text-accent">chatbot with IBM Watson Assistant</span>.</p>
-                    <a href="#" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
-                        <i data-lucide="link" class="w-4 h-4 mr-1"></i> View Demo / Details (Link Placeholder)
+                    <a href="https://www.linkedin.com/posts/shaxpy28_ibmindia-dataanalytics-netflix-activity-6854266942082170880-_4vi" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
+                        <i data-lucide="link" class="w-4 h-4 mr-1"></i> View Demo
                     </a>
                 </div>
             </div>
@@ -669,7 +745,7 @@
                     <h3 class="text-xl font-bold text-accent mb-2 flex items-center"><i data-lucide="file-text" class="w-5 h-5 mr-2"></i> DTLMV2 - Deep Transfer Learning Mask Classifier (Elsevier)</h3>
                     <p class="text-sm text-gray-400 mb-4">Published in ELSEVIER - Applied Soft Computing Journal (2022)</p>
                     <p class="text-gray-300">MobileNet V2 model trained using Imagenet weights on a custom dataset, achieving <span class="text-accent">97% accuracy</span>. Showcases expertise in transfer learning and model validation for real-time systems.</p>
-                    <a href="#" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
+                    <a href="https://doi.org/10.1016/j.asoc.2022.109313" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
                         <i data-lucide="link" class="w-4 h-4 mr-1"></i> [Full Text/Abstract Link]
                     </a>
                 </div>
@@ -679,7 +755,7 @@
                     <h3 class="text-xl font-bold text-accent mb-2 flex items-center"><i data-lucide="zap" class="w-5 h-5 mr-2"></i> Average model of DC-DC converters</h3>
                     <p class="text-sm text-gray-400 mb-4">Research Paper (2022)</p>
                     <p class="text-gray-300">State space analysis of practical DC-DC converters to determine the high gain operating point, considering coil resistance. (Electrical Engineering Background)</p>
-                    <a href="#" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
+                    <a href="https://doi.org/10.1080/02522667.2022.2039471" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
                         <i data-lucide="link" class="w-4 h-4 mr-1"></i> [Full Text/Abstract Link]
                     </a>
                 </div>
@@ -715,9 +791,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-center text-sm text-gray-400">
             <p>&copy; 2025 Shashwat Pandey. Built with HTML & Tailwind CSS.</p>
             <div class="flex space-x-6 mt-4 md:mt-0">
-                <a href="https://linkedin.com/in/shaxpy28" target="_blank" class="hover:text-accent transition duration-150">LinkedIn</a>
-                <a href="mailto:shashwatpandey28@gmail.com" class="hover:text-accent transition duration-150">Email</a>
-                <a href="Personal Portfolio" target="_blank" class="hover:text-accent transition duration-150">Portfolio Link</a>
+                <a href="https://linkedin.com/in/shaxpy28" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition duration-150">LinkedIn</a>
+                <a href="mailto:shashwatpandey28@gmail.com" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition duration-150">Email</a>
             </div>
         </div>
     </footer>
@@ -924,8 +999,6 @@
 
 
 
-
-
             // Add mouse move event listener for 3D effect
             canvas.addEventListener('mousemove', (e) => {
                 const rect = canvas.getBoundingClientRect();
@@ -940,176 +1013,47 @@
                 targetRotationY = 0;
             });
 
-            let currentAngle = 0;
-            const totalPercentage = 100;
-            
-            // Animation variables
-            let animationProgress = 0;
-            const animationDuration = 1200; // 1.2 seconds
-            
-            // 3D perspective constants
-            const perspective = 800; // Perspective depth
+            // Card effect variables
+            let mouseX = 0;
+            let mouseY = 0;
+            let targetRotationX = 0;
+            let targetRotationY = 0;
 
-            // Draw the segments with enhanced effects
-            function animatePie(timestamp) {
-                if (!animatePie.startTime) animatePie.startTime = timestamp;
-                const elapsed = timestamp - animatePie.startTime;
-                animationProgress = Math.min(1, elapsed / animationDuration);
+            // Mouse movement handler for interactive effects
+            function handleMouseMovement(e) {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = ((e.clientX - rect.left) / canvas.width - 0.5) * 2;
+                mouseY = ((e.clientY - rect.top) / canvas.height - 0.5) * 2;
+                targetRotationX = mouseY * 15;
+                targetRotationY = mouseX * 15;
+            }
 
-                // Smooth rotation interpolation
+            canvas.addEventListener('mousemove', handleMouseMovement);
+            canvas.addEventListener('mouseleave', () => {
+                targetRotationX = 0;
+                targetRotationY = 0;
+            });
+
+                    // Card interaction animation
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                // Update rotation
                 currentRotationX += (targetRotationX - currentRotationX) * 0.1;
                 currentRotationY += (targetRotationY - currentRotationY) * 0.1;
-
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
-                // Apply 3D transformation
-                ctx.save();
-                ctx.translate(centerX, centerY);
-                ctx.rotate(currentRotationY * Math.PI / 180);
-                ctx.scale(1, Math.cos(currentRotationX * Math.PI / 180));
-                ctx.translate(-centerX, -centerY);
-                
-                currentAngle = 0;
-
-                // Add overall glow effect
-                ctx.shadowBlur = 15;
-                ctx.shadowColor = 'rgba(20, 184, 166, 0.3)';
-
-                pieData.forEach((slice, index) => {
-                    // Calculate angles with padding for separation
-                    const padding = 0.02; // Add small gap between segments
-                    const finalAngle = (slice.percentage / totalPercentage) * (Math.PI * 2 - padding * pieData.length);
-                    const animatedAngle = finalAngle * animationProgress;
-
-                    // Create complex gradient with shimmer
-                    const baseGradient = ctx.createRadialGradient(centerX, centerY, radius * 0.5, centerX, centerY, radius);
-                    baseGradient.addColorStop(0, slice.gradient.start);
-                    baseGradient.addColorStop(0.5, slice.gradient.start);
-                    baseGradient.addColorStop(1, slice.gradient.end);
-
-                    // Add animated shimmer effect
-                    const shimmerPos = (elapsed / 2000 + index / pieData.length) % 1;
-                    const shimmerGradient = ctx.createLinearGradient(
-                        centerX - radius, centerY - radius,
-                        centerX + radius, centerY + radius
-                    );
-                    shimmerGradient.addColorStop(Math.max(0, shimmerPos - 0.1), 'rgba(255, 255, 255, 0)');
-                    shimmerGradient.addColorStop(shimmerPos, 'rgba(255, 255, 255, 0.1)');
-                    shimmerGradient.addColorStop(Math.min(1, shimmerPos + 0.1), 'rgba(255, 255, 255, 0)');
-
-                    ctx.fillStyle = baseGradient;
-                    
-                    // Draw 3D segment with side walls
-                    // Main face
-                    ctx.beginPath();
-                    ctx.moveTo(centerX, centerY);
-                    ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + animatedAngle);
-                    ctx.closePath();
-                    ctx.fill();
-
-                    // Draw side wall for 3D effect
-                    if (animationProgress === 1) {
-                        ctx.beginPath();
-                        ctx.moveTo(centerX + radius * Math.cos(currentAngle), 
-                                 centerY + radius * Math.sin(currentAngle));
-                        ctx.lineTo(centerX + radius * Math.cos(currentAngle), 
-                                 centerY + radius * Math.sin(currentAngle) + slice.height);
-                        ctx.arc(centerX, centerY + slice.height, radius, 
-                              currentAngle, currentAngle + animatedAngle);
-                        ctx.lineTo(centerX + radius * Math.cos(currentAngle + animatedAngle), 
-                                 centerY + radius * Math.sin(currentAngle + animatedAngle));
-                        ctx.closePath();
-                        
-                        // Darker gradient for side
-                        const sideGradient = ctx.createLinearGradient(
-                            centerX, centerY,
-                            centerX, centerY + slice.height
-                        );
-                        sideGradient.addColorStop(0, slice.gradient.end);
-                        sideGradient.addColorStop(1, shadeColor(slice.gradient.end, -30));
-                        ctx.fillStyle = sideGradient;
-                        ctx.fill();
-                    }
-
-                    // Add shimmer overlay
-                    ctx.fillStyle = shimmerGradient;
-                    ctx.fill();
-
-                    currentAngle += finalAngle;
-                    
-                    // Draw text label on the canvas (Donut inner text)
-                    if (animationProgress === 1) {
-                         // Determine mid-point angle for label placement
-                        const midAngle = currentAngle - (finalAngle / 2);
-                        const textX = centerX + Math.cos(midAngle) * (radius / 2);
-                        const textY = centerY + Math.sin(midAngle) * (radius / 2);
-                        
-                        if (slice.percentage >= 10) { // Only draw label if slice is big enough
-                            ctx.fillStyle = '#161b22'; // Dark color for contrast
-                            ctx.font = 'bold 13px Inter, sans-serif';
-                            ctx.textAlign = 'center';
-                            ctx.textBaseline = 'middle';
-                            ctx.fillText(`${slice.percentage}%`, textX, textY);
-                        }
-                    }
+                cards.forEach(card => {
+                    card.style.transform = `
+                        perspective(1000px) 
+                        rotateX(${currentRotationX}deg) 
+                        rotateY(${currentRotationY}deg)
+                    `;
                 });
-                
-                // Draw enhanced center hole for donut effect
-                ctx.beginPath();
-                ctx.arc(centerX, centerY, radius * 0.4, 0, Math.PI * 2);
-                
-                // Create inner gradient for depth effect
-                const innerGradient = ctx.createRadialGradient(
-                    centerX + radius * 0.1, centerY - radius * 0.1, 0,
-                    centerX, centerY, radius * 0.4
-                );
-                innerGradient.addColorStop(0, '#1f2937');
-                innerGradient.addColorStop(0.7, '#161b22');
-                innerGradient.addColorStop(1, '#0d1117');
-                
-                ctx.fillStyle = innerGradient;
-                ctx.shadowBlur = 10;
-                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-                ctx.fill();
-                
-                // Add subtle inner ring
-                ctx.beginPath();
-                ctx.arc(centerX, centerY, radius * 0.38, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(20, 184, 166, 0.1)';
-                ctx.lineWidth = 1;
-                ctx.stroke();
-
-
-                if (animationProgress < 1) {
-                    requestAnimationFrame(animatePie);
-                } else {
-                    // Once animation is complete, generate the legend HTML
-                    legendContainer.innerHTML = ''; // Clear "Loading" text
-                    pieData.forEach(slice => {
-                        const legendItem = document.createElement('div');
-                        legendItem.className = 'flex items-center';
-                        legendItem.innerHTML = `
-                            <div class="w-3 h-3 rounded-full mr-3 shadow-md" style="background-color: ${slice.jsColor};"></div>
-                            <span class="text-gray-300 font-semibold">${slice.percentage}%</span>
-                            <span class="ml-2 text-gray-400">${slice.label}</span>
-                        `;
-                        legendContainer.appendChild(legendItem);
-                    });
-                }
             }
             
-            // Use IntersectionObserver to start the animation when visible
-            const pieObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        requestAnimationFrame(animatePie);
-                        pieObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 }); 
-            
-            pieObserver.observe(canvas);
-        }
+
+                  
+                    
 
         // Card interaction effects
         document.addEventListener('DOMContentLoaded', () => {
