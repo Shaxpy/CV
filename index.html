@@ -1,216 +1,1159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Shashwat's CV</title>
-<link rel='stylesheet' type ="text/css" href='styles.css'>
-<link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<link rel='stylesheet' href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shashwat Pandey | Edge AI & Robotics Specialist</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
+    <script type="module" src="https://unpkg.com/lucide@latest"></script>
+    <!-- Load AOS for scroll animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Load Three.js for 3D elements (Used for the Hero animation) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Load Tech Stack Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #14B8A6; /* Tailwind teal-500 */
+            --secondary-color: #0EA5E9; /* Tailwind blue-500 */
+            --accent-color: #8B5CF6; /* Tailwind violet-500 */
+            --card-tilt-amount: 10deg;
+        }
+        
+        /* Tech Stack Icons Styling */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .tech-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-icon:hover {
+            transform: translateY(-3px);
+            background: rgba(20, 184, 166, 0.1);
+            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.2);
+        }
+        
+        /* Custom tooltip styles */
+        .tech-icon {
+            position: relative;
+        }
+        
+        .tech-icon[title]:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 8px;
+            background-color: rgba(15, 23, 42, 0.95);
+            color: #fff;
+            font-size: 12px;
+            white-space: nowrap;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            z-index: 100;
+            margin-bottom: 5px;
+            border: 1px solid rgba(20, 184, 166, 0.3);
+        }
+        
+        /* FIX: Ensure scrolling is always enabled on the main document */
+        html {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: scroll; /* Explicitly allow vertical scrolling */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #e5e7eb;
+            scroll-behavior: smooth;
+            /* Removed overflow-x: hidden from body since it's on html now */
+            overflow-x: hidden; /* Re-added to body to ensure compatibility */
+        }
+        .text-accent {
+            color: var(--primary-color);
+        }
+        .bg-accent {
+            background-color: var(--primary-color);
+        }
+        .border-accent {
+            border-color: var(--primary-color);
+        }
+        .section-heading {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+        .card {
+            background-color: #161b22;
+            transition: all 0.3s ease-out;
+            border: 1px solid rgba(20, 184, 166, 0.1);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .card:hover {
+            transform: translateY(-5px) rotateX(var(--rotateX, 0deg)) rotateY(var(--rotateY, 0deg));
+            box-shadow: 0 10px 20px rgba(20, 184, 166, 0.2);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: radial-gradient(
+                800px circle at var(--mouse-x) var(--mouse-y), 
+                rgba(20, 184, 166, 0.1),
+                transparent 40%
+            );
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .card:hover::before {
+            opacity: 1;
+        }
+        
+        /* Custom animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Skill bars */
+        .skill-bar {
+            height: 8px;
+            background-color: #1f2937;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .skill-progress {
+            height: 100%;
+            border-radius: 4px;
+            /* Initial width set to 0% for animation effect */
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+        
+        /* Circuit board background */
+        .circuit-bg {
+            position: relative;
+            overflow: hidden;
+        }
+        .circuit-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background-image: 
+                linear-gradient(90deg, rgba(20, 184, 166, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(20, 184, 166, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: circuitMove 20s linear infinite;
+            z-index: -1;
+        }
+        @keyframes circuitMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-40px); }
+        }
+        
+        /* Neural network animation */
+        .neural-network {
+            position: fixed; /* Changed to fixed to cover viewport */
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            opacity: 0.1;
+            pointer-events: none; /* Important to allow interaction with content */
+        }
+
+        /* 3D Cube Container */
+        #cubeContainer {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+        .hero-title {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* NEW: Highlight animation for skill linking */
+        .highlight-skill {
+            animation: skillFlash 1.5s 3; /* Flash 3 times */
+            box-shadow: 0 0 15px 5px var(--primary-color) !important;
+        }
+        @keyframes skillFlash {
+            0% { box-shadow: 0 0 15px 5px rgba(20, 184, 166, 0.8) !important; }
+            50% { box-shadow: 0 0 5px 1px rgba(20, 184, 166, 0.2) !important; }
+            100% { box-shadow: 0 0 15px 5px rgba(20, 184, 166, 0.8) !important; }
+        }
+    </style>
 </head>
-<body>
-	
-  <section id="user-info">
-    <div class="nav-bar">
-      <nav class="navbar navbar-expand-lg ">
-          <a class="navbar-brand" href="#"><img src="https://drive.google.com/uc?id=1xzg_8DVinkX8CpAyi0B_8f6TF1F5bfK4"></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa fa-podcast"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item ">
-   <li class="nav-item">
-                <a class="nav-link" href="#top">WHO AM I ?</a>
-              </li>
-    		<li class="nav-item">
-                <a class="nav-link" href="#resume">WORK EXPERIENCE</a>
-                </li>
-                <a class="nav-link" href="#about">PROJECTS</a>
-              </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#contact">CONTACT</a>
-              </li>
-            </ul>
-          </div>
+<body class="circuit-bg">
+    <!-- Neural Network Animation Canvas -->
+    <canvas id="neuralCanvas" class="neural-network"></canvas>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-background/95 backdrop-blur-sm shadow-lg border-b border-gray-700/50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="#hero" class="text-xl font-bold text-accent tracking-wider flex items-center">
+                <i data-lucide="scan-line" class="w-6 h-6 mr-2 floating" style="animation-delay: 0.5s;"></i>
+                SHASHWAT P.
+            </a>
+            <div class="flex space-x-6 text-sm font-medium">
+                <a href="#about" class="hover:text-primary transition duration-150">About</a>
+                <a href="#skills" class="hover:text-primary transition duration-150">Skills</a>
+                <a href="#experience" class="hover:text-primary transition duration-150">Experience</a>
+                <a href="#projects" class="hover:text-primary transition duration-150">Projects</a>
+                <a href="#research" class="hover:text-primary transition duration-150">Research</a>
+                <a href="mailto:shashwatpandey28@gmail.com" class="text-white hover:text-primary transition duration-150 flex items-center">
+                    <i data-lucide="mail" class="w-4 h-4 mr-1"></i>Contact
+                </a>
+            </div>
         </nav>
-      </div>
+    </header>
 
-<section id="header">
-    <div class="container text-center">
-        <div class="user">
-            <img src="https://drive.google.com/uc?id=1inO5YN6YwRyEj5cUoKZl47vX1krqnixk">
-<h1>Shashwat Pandey</h1>
-<p>Robotics Perception Engineer</p>
-        </div>
-    </div>
-    <div class="scroll-btn">
-        <div class="scroll-bar"><a href="#about"><span></span></a></div>
-    </div>
-</section>
-
-<div class="about container" id="top">
-    <div class="row">
-        <div class="col-md-6 text-center">
-            <img src="https://drive.google.com/uc?id=12gDbV2xz_8UlEbQqmoIBdWEoAxrdNGs0" class="profile-img">
-        </div>
-        <div class="col-md-6">
-            <h1> Who Am I ?</h1>
-            <p>
-Hi there👋🏼.. <br>
-I am a Robotics Perception guy <br>
-Experienced and passionate Roboticist with a demonstrated history in a range of startup robotics industries including multi-view vision systems (2D/3D), on-road self driving, and ADAS strategies automotive industry.  
-<br> 
-I just love building and debugging robots! My projects involve prototyping robots powered with open-source frameworks like 
-<a href="https://github.com/Shaxpy/Project-AGV" target="_blank" rel="noreferrer noopener">ROS1/2</a>, in the areas of Perception, Mapping - SLAM, testing algorithms on 
-<a href="https://github.com/Shaxpy/Self-Driving" target="_blank" rel="noreferrer noopener">CARLA</a><br>
-I have also been involved with scaling up my Deep Learning models using 
-<a href="https://github.com/Shaxpy/FasterRCNN-TRITON-deployment" target="_blank" rel="noreferrer noopener">Nvidia's Deepstream SDK</a></p> 
-
-
-<h3>More about me</h3><p>
-
-Well, having worked with ARM Cortex powered SoCs, Edge devices RPi4, Jetson Nano, Intel's D455 Realsense stereo cameras, I strive for hands-on roles for multi-modal architecture and software design, development, integration, testing, demonstration, and providing a service to clients as R&D team lead as well as an individual developer! 
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <!-- 1. Hero Section -->
+        <section id="hero" class="py-24 md:py-32 flex flex-col items-center text-center">
+            <!-- 3D Cube Placeholder for Three.js -->
+            <div id="cubeContainer" data-aos="zoom-in">
+                <!-- Three.js will inject the canvas here -->
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-3 leading-tight text-white hero-title" data-aos="fade-up">
+                Shashwat <span class="text-accent">Pandey</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-400 mb-8 max-w-3xl" data-aos="fade-up" data-aos-delay="100">
+                Master Thesis @ SICK AG | <span class="text-accent">Edge AI</span> for <span class="text-accent">Robotics</span> | Computer Vision & Autonomous Perception Professional
             </p>
+            <div class="space-x-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="#projects" class="inline-flex items-center px-8 py-3 border-2 border-accent text-lg font-semibold rounded-lg bg-accent text-background hover:bg-primary-600 transition duration-300 shadow-xl shadow-primary/30">
+                    View Key Projects
+                </a>
+                <div class="flex space-x-4">
+                    <a href="https://linkedin.com/in/shaxpy28" target="_blank" class="inline-flex items-center px-6 py-3 border-2 border-gray-600 text-lg font-semibold rounded-lg text-white hover:border-accent hover:text-accent transition duration-300">
+                        <i data-lucide="linkedin" class="w-5 h-5 mr-2"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/shaxpy" target="_blank" class="inline-flex items-center px-6 py-3 border-2 border-gray-600 text-lg font-semibold rounded-lg text-white hover:border-accent hover:text-accent transition duration-300">
+                        <i data-lucide="github" class="w-5 h-5 mr-2"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
 
-            <!-- PROGRESS -->
-            <div class="skills-bar">
-              <p>Computer Vision</p>
-              <div class="progress">
-                <div class="progress-bar" style="width: 80%;">80% 
-                </div></div>
-                <p>ROS</p>
-                  <div class="progress">
-                    <div class="progress-bar" style="width: 60%;">60%
-                     </div></div>
-		   <p>Arduino and IoT </p>
-                  <div class="progress">
-                    <div class="progress-bar" style="width: 70%;">70% 
-                    </div></div>
-                <p>Deep learning </p>
-                <div class="progress">
-                  <div class="progress-bar" style="width: 50%;">50% 
-                  </div></div>
-              </div>
+        <!-- Separator with animated dots -->
+        <div class="h-px w-full bg-gray-800 my-16 relative">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex space-x-2">
+                <div class="w-2 h-2 bg-accent rounded-full floating" style="animation-delay: 0s;"></div>
+                <div class="w-2 h-2 bg-accent rounded-full floating" style="animation-delay: 0.2s;"></div>
+                <div class="w-2 h-2 bg-accent rounded-full floating" style="animation-delay: 0.4s;"></div>
             </div>
         </div>
-    </div>
-</div>
-<!--GiTHUB and Linkedin-->
-<div class="social-icons">
-  <ul>
-    <a href="https://www.linkedin.com/in/shashwat-pandey-0110b016a/" target="_blank" rel="noreferrer noopener"><li><i class="fa fa-linkedin"></i></li></a><br>
-    <a href="https://github.com/shaxpy" target="_blank" rel="noreferrer noopener"><li><i class="fa fa-git"></i></li></a>
-  </ul>
-</div>
-<!-- PROJECTS -->
 
-<div class="resume" id="resume">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <h1> My Experience</h1>
-        <ul class="timeline">
-          <li>
-             <span>
-<h4> <br> Robotics Perception developer @Kritikal Solutions </h4></span><b>(2022 April - 2023 January)</b>
-<p>- I worked here as a lead on projects associated: <br>
-- Built a 360 degree Surround view system for clients in automotive industry <br>
-- ADAS strategies for prototyping, performing R&D to drawing inference from dataset<br>
-- Developed vision pipelines for ; multi-view 3D reconstruction using photogrammetry techniques like SFM (Structure-from-motion), ICP (Iterative Closest Point), voxel grid mapping, camera calibration, stereo matching, multiple-view geometry and point-cloud registration, using Open3D, OpenGL <br>
-- Deployed DL models using Deepstream SDK by Nvidia </p>
-<b>Company</b>- Kritikal Solutions<br>
-<b>Work type</b>- Full-time<br>
-<b>Location</b>- Noida,India<br>
-           </li>
-        <li>
-<h4> <br> Software Developer Intern @IBM India</h4></span><b>(2022 January - 2022 July)</b>
-<p>- My team was offered this internship because we won the IBM Hack Challenge 2021 by building a web portal FindYourBinge pan India! I worked on analytics and software development on Linux, in the cybersecurity division of IBM - India Software Labs  </p>
-<b>Company</b>- IBM<br>
-<b>Work type</b>- Full-time<br>
-<b>Location</b>- Bangalore,India<br>
-           </li>
-        <li>
+        <!-- 2. About/Summary Section (UPDATED with Pie Chart) -->
+        <section id="about" class="py-12" data-aos="fade-up">
+            <h2 class="text-4xl font-bold section-heading mb-8">About Me</h2>
+            <div class="text-lg leading-relaxed text-gray-300 space-y-4 max-w-4xl">
+                <p>
+                    I am a Master's engineer in <span class="text-accent">Perception, Computer Vision, and Edge AI for Robotics</span> with over three years of R&D experience. My focus is translating complex vision models—such as <span class="text-accent">6D Pose Estimation</span> and Semantic Segmentation—into reliable, real-time industrial solutions. I manage the full deployment lifecycle: from system development using <span class="text-accent">ROS/ROS2, C++, and Python</span>, to model optimization via <span class="text-accent">TensorRT, ONNX, and Deepstream SDK</span>. Currently, I am developing safe human-robot solutions at <span class="text-accent">SICK Sensor Intelligence</span>, leveraging embedded AI on <span class="text-accent">3D Time-of-Flight (ToF)</span> cameras. I excel at integrating high-performance AI on constrained edge hardware.
+                </p>
+            </div>
+            
+        </section>
 
-<h4> <br> Computer Vision and Robotics Intern @Swift Robotics, London </h4></span><b>(2020 September - 2021 July)</b>
-<p>- Some of my work was working with ROS Melodic : 2D-3D SLAM, navigation, mapping, path planning, robot localization, odometry, with Intel Realsense D455 and RPlidar!<br>
-- Performing Stereovision using OpenCV's StereoSGBM algorithm while creating dense disparity maps from stereo image pairs along with WLS (Weighted Least Squares) filtering </p>
-<b>Company</b>- Swift Robotics<br>
-<b>Work type</b>- Full-time<br>
-<b>Location</b>- London,UK<br>
-          </li>
-       
-      </div>
- </p> </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- SERVICE -->
-<div class="services" id="about"> 
-  <div class="container">
-    <h1 class="text-center">What can I do for you?</h1>
-    <p class="text-center"> I am a person who can find plenty of ways to solve a Robotics problem. Maybe you'll find something useful in my projects below! 
-    </p>  
-<!-- <h2 class="text-center">My Projects!</h2> -->
-    <div class='row'>
-      <div class="col-md-6">
-        <div class="services-box">
-<i class="fa fa-ravelry"><a href="https://docs.google.com/document/d/17CM_MyeO6B1EEIyfEPVRAg9hAfLbq-2w9bZx_E1Z9_0/edit?usp=sharing" target="_blank" rel="noreferrer noopener"></i><span> <h3> Awards and Published work👈🏻!</h3></span>
-         </div></a>
-      </div>
-<div class="col-md-6">
-        <div class="services-box">
-  <i class="fa fa-line-chart"><a href="https://github.com/Shaxpy/Self-Driving" target="_blank" rel="noreferrer noopener"></i><span>  Self-Driving</span>
-        </div></a>
-      </div>
-	<div class="col-md-6">
-        <div class="services-box">
-          <i class="fa fa-gears "><a href="https://github.com/Shaxpy/Robotics-and-AI" target="_blank" rel="noreferrer noopener"></i><span> 
- Robotics</span>
-        </div></a>
-      </div>
+        <!-- Separator -->
+        <div class="h-px w-full bg-gray-800 my-16"></div>
 
-      <div class="col-md-6">
-        <div class="services-box">
-         <center> <i class="fa fa-laptop"><a href="https://github.com/Shaxpy/Computer-Vision" target="_blank" rel="noreferrer noopener"></i><span> Computer Vision</span></center></a>
+        <!-- 3. Technical Skills Section -->
+        <section id="skills" class="py-12">
+            <h2 class="text-4xl font-bold section-heading mb-8">Technical Expertise</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skill Category: Core Robotics/OS -->
+                <div class="card p-6 rounded-xl" data-aos="fade-up">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent flex items-center"><i data-lucide="bot" class="w-6 h-6 mr-2"></i> Core Robotics & OS</h3>
+                    <div class="tech-stack mb-4">
+                        <img src="https://www.vectorlogo.zone/logos/ros/ros-ar21~bgwhite.svg" class="tech-icon" alt="ROS2" title="ROS2"/>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="tech-icon" alt="Python" title="Python"/>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" class="tech-icon" alt="C++" title="C++"/>
+                        <img src="https://www.vectorlogo.zone/logos/ubuntu/ubuntu-icon.svg" class="tech-icon" alt="Ubuntu" title="Ubuntu"/>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="tech-icon" alt="Docker" title="Docker"/>
+                    </div>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kelo-ros2')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>ROS1 / ROS2 (Migration, SLAM, TF)</span>
+                            </a>
+                            <span>95%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="95"></div>
+                        </div>
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kelo-ros2')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>C++</span>
+                            </a>
+                            <span>90%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="90"></div>
+                        </div>
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('sick-ai')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>Python</span>
+                            </a>
+                            <span>95%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="95"></div>
+                        </div>
+                    </ul>
+                </div>
+
+                <!-- Skill Category: AI/ML/Deployment -->
+                <div class="card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent flex items-center"><i data-lucide="brain-circuit" class="w-6 h-6 mr-2"></i> AI & Deployment</h3>
+                    <div class="tech-stack mb-4">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg" class="tech-icon" alt="PyTorch" title="PyTorch"/>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" class="tech-icon" alt="TensorFlow" title="TensorFlow"/>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="tech-icon" alt="Python" title="Python"/>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" class="tech-icon" alt="OpenCV" title="OpenCV"/>
+                        <img src="https://www.vectorlogo.zone/logos/onnxai/onnxai-icon.svg" class="tech-icon" alt="ONNX Runtime" title="ONNX Runtime"/>
+                    </div>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('trumpf-cv')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>PyTorch</span>
+                            </a>
+                            <span>90%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="90"></div>
+                        </div >
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('trumpf-cv')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>TensorFlow</span>
+                            </a>
+                            <span>85%</span>
+                        </li >
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="85"></div>
+                        </div>
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kritikal-3d')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>TensorRT & ONNX</span>
+                            </a>
+                            <span>80%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="80"></div>
+                        </div>
+                    </ul>
+                </div>
+
+                <!-- Skill Category: Perception & CV -->
+                <div class="card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent flex items-center"><i data-lucide="eye" class="w-6 h-6 mr-2"></i> Perception & Vision</h3>
+                    <div class="tech-stack mb-4">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/opencv/opencv-original.svg" class="tech-icon" alt="OpenCV" title="OpenCV"/>
+                        <img src="images/open3d.png" class="tech-icon" alt="Open3D" title="Open3D"/>
+                        <img src="https://www.vectorlogo.zone/logos/ros/ros-ar21~bgwhite.svg" class="tech-icon" alt="ROS" title="ROS"/>
+                        <img src="https://raw.githubusercontent.com/numpy/numpy/main/branding/logo/primary/numpylogo.svg" class="tech-icon" alt="NumPy" title="NumPy"/>
+                    </div>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('trumpf-cv')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>Object Detection & Segmentation</span>
+                            </a>
+                            <span>90%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="90"></div>
+                        </div>
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kritikal-3d')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>6D Pose Estimation / SfM</span>
+                            </a>
+                            <span>85%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="85"></div>
+                        </div>
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kritikal-3d')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>OpenCV & Open3D (ICP)</span>
+                            </a>
+                            <span>95%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="95"></div>
+                        </div>
+                    </ul>
+                </div>
+
+                <!-- Skill Category: Edge AI/Hardware -->
+                <div class="card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent flex items-center"><i data-lucide="chip" class="w-6 h-6 mr-2"></i> Edge AI & Hardware</h3>
+                    <div class="tech-stack mb-4">
+                        <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" class="tech-icon" alt="TensorRT" title="TensorRT"/>
+                        <img src="https://www.vectorlogo.zone/logos/onnxai/onnxai-icon.svg" class="tech-icon" alt="ONNX Runtime" title="ONNX Runtime"/>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg" class="tech-icon" alt="Raspberry Pi" title="Raspberry Pi"/>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" class="tech-icon" alt="Arduino" title="Arduino"/>
+                        <img src="https://www.vectorlogo.zone/logos/nvidia/nvidia-icon.svg" class="tech-icon" alt="NVIDIA Jetson" title="NVIDIA Jetson"/>
+                    </div>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kritikal-3d')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>NVIDIA Jetson / Deepstream</span>
+                            </a>
+                            <span>85%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="85"></div>
+                        </div>
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('trumpf-cv')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>Raspberry Pi & Embedded C</span>
+                            </a>
+                            <span>80%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="80"></div>
+                        </div>
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('sick-ai')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>AI Accelerators / ATmega</span>
+                            </a>
+                            <span>75%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="75"></div>
+                        </div>
+                    </ul>
+                </div>
+
+                <!-- Skill Category: Sensors -->
+                <div class="card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent flex items-center"><i data-lucide="scan" class="w-6 h-6 mr-2"></i> Sensors & Data</h3>
+                    <div class="tech-stack mb-4">
+                        <img src="https://www.vectorlogo.zone/logos/intel/intel-icon.svg" class="tech-icon" alt="Intel RealSense" title="Intel RealSense"/>
+                        <img src="images/sick.png" class="tech-icon" alt="SICK Sensors" title="SICK Sensors"/>
+                        <img src="https://www.vectorlogo.zone/logos/opencv/opencv-icon.svg" class="tech-icon" alt="OpenCV" title="OpenCV"/>
+                        <img src="images/open3d.png" class="tech-icon" alt="Open3D" title="Open3D"/>
+                    </div>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('sick-ai')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>3D Time-of-Flight (ToF)</span>
+                            </a>
+                            <span>85%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="85"></div>
+                        </div>
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('swift-ros')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>LiDAR / Intel RealSense</span>
+                            </a>
+                            <span>80%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="80"></div>
+                        </div>
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kritikal-3d')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>Multi-camera Synchronization</span>
+                            </a>
+                            <span>85%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="85"></div>
+                        </div>
+                    </ul>
+                </div>
+
+                <!-- Skill Category: Software Engineering -->
+                <div class="card p-6 rounded-xl" data-aos="fade-up" data-aos-delay="500">
+                    <h3 class="text-2xl font-semibold mb-4 text-accent flex items-center"><i data-lucide="server" class="w-6 h-6 mr-2"></i> Software Architecture</h3>
+                    <div class="tech-stack mb-4">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" class="tech-icon" alt="Docker" title="Docker - Containerization"/>
+                        <img src="https://www.vectorlogo.zone/logos/ubuntu/ubuntu-icon.svg" class="tech-icon" alt="Ubuntu" title="Ubuntu - Linux OS"/>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="tech-icon" alt="Git" title="Git - Version Control"/>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" class="tech-icon" alt="GitHub" title="GitHub - Code Collaboration"/>
+                    </div>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('kelo-ros2')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>Docker & Containerization</span>
+                            </a>
+                            <span>85%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="85"></div>
+                        </div>
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('trumpf-cv')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>CI/CD Practices</span>
+                            </a>
+                            <span>80%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="80"></div>
+                        </div>
+                        <li class="flex justify-between items-center">
+                            <a href="javascript:void(0)" onclick="scrollToAndHighlightSkill('sick-ai')" class="hover:text-accent hover:underline cursor-pointer">
+                                <span>Linux/Ubuntu & Bash</span>
+                            </a>
+                            <span>90%</span>
+                        </li>
+                        <div class="skill-bar">
+                            <div class="skill-progress bg-accent" data-progress="90"></div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="h-px w-full bg-gray-800 my-16"></div>
+
+        <!-- 4. Experience Section (IDs added here) -->
+        <section id="experience" class="py-12">
+            <h2 class="text-4xl font-bold section-heading mb-12">Relevant Experience</h2>
+
+            <div class="space-y-10">
+                <!-- Job 1: SICK Sensor Intelligence -->
+                <div class="card p-8 rounded-xl border-t-4 border-accent" data-aos="fade-right" id="sick-ai">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl font-bold text-white">Master Thesis Student (Safe Robotics / Edge AI)</h3>
+                        <span class="text-sm font-medium text-gray-400">Waldkirch, Germany | Sep 2025 - Present</span>
+                    </div>
+                    <p class="text-lg text-gray-400 mb-4">SICK Sensor Intelligence</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                        <li>Developing an Edge AI perception system for human detection using <span class="text-accent">3D Time-of-Flight (ToF)</span> camera data (SICK safe Visionary2), prioritizing industrial safety and accuracy.</li>
+                        <li>Focused on <span class="text-accent">model optimization and quantization</span> using <span class="text-accent">ONNXRuntime</span> for real-time inference on embedded AI accelerators directly on camera hardware.</li>
+                        <li>Integrating real-time <span class="text-accent">object detection, segmentation, and 6D pose estimation</span> into a production pipeline.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 2: TRUMPF GmbH + Co. KG -->
+                <div class="card p-8 rounded-xl border-t-4 border-gray-600" data-aos="fade-left" id="trumpf-cv">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl font-bold text-white">Computer Vision Software Engineer</h3>
+                        <span class="text-sm font-medium text-gray-400">Ditzingen, Germany | Mar 2025 - Aug 2025</span>
+                    </div>
+                    <p class="text-lg text-gray-400 mb-4">TRUMPF GmbH + Co. KG</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                        <li>Implemented a robust industrial visual inspection pipeline using <span class="text-accent">YOLOv8 and SegFormer-B3</span>, achieving significant gains in segmentation accuracy for complex manufacturing geometries.</li>
+                        <li>Engineered a low-latency real-time system on <span class="text-accent">Raspberry Pi</span>, integrating camera capture and inference for quality inspection on constrained edge hardware.</li>
+                        <li>Designed advanced <span class="text-accent">transfer learning</span> strategies by fine-tuning on proprietary automotive datasets.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 3: KELO Robotics GmbH (NEW) -->
+                <div class="card p-8 rounded-xl border-t-4 border-gray-600" data-aos="fade-right" id="kelo-ros2">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl font-bold text-white">Werkstudent – Software Developer</h3>
+                        <span class="text-sm font-medium text-gray-400">Augsburg, Germany | Apr 2024 – Oct 2024</span>
+                    </div>
+                    <p class="text-lg text-gray-400 mb-4">KELO Robotics GmbH</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                        <li>Migrated the entire C++ robotic software stack from <span class="text-accent">ROS1 to ROS2 Rolling</span>, including creating new packages and setting up **Gazebo simulation**.</li>
+                        <li>Led hardware setup and software integration for a Collaborative Mobile Robot, including **Python ARM API** integration.</li>
+                        <li>Optimized system performance by debugging memory consumption and lag issues, implementing **multi-threading** and analyzing node spinning behavior.</li>
+                        <li>Developed and maintained <span class="text-accent">Docker containers</span> for seamless testing across different ROS2 distribution versions.</li>
+                    </ul>
+                </div>
+
+                <!-- Job 4: Kritikal Solutions -->
+                <div class="card p-8 rounded-xl border-t-4 border-gray-600" data-aos="fade-left" id="kritikal-3d">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl font-bold text-white">Computer Vision Engineer (Full-time)</h3>
+                        <span class="text-sm font-medium text-gray-400">Noida, India | Apr 2022 - Jan 2023</span>
+                    </div>
+                    <p class="text-lg text-gray-400 mb-4">Kritikal Solutions</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                        <li>Developed end-to-end 360° bird-eye view software stack as part of <span class="text-accent">ADAS</span> (calibration, stitching, blending).</li>
+                        <li>Explored Apple's TrueDepth cameras; developed multi-view <span class="text-accent">3D reconstruction</span> using photogrammetry (<span class="text-accent">SfM</span>), <span class="text-accent">ICP</span>, and point-cloud registration.</li>
+                        <li>Deployed Deep Learning models on <span class="text-accent">Nvidia TRITON server</span> using <span class="text-accent">Deepstream SDK</span> for high-performance, real-time inference.</li>
+                    </ul>
+                </div>
+                
+                <!-- Job 5: Swift Robotics -->
+                <div class="card p-8 rounded-xl border-t-4 border-gray-600" data-aos="fade-right" id="swift-ros">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl font-bold text-white">Computer Vision and Robotics Developer (Part-time)</h3>
+                        <span class="text-sm font-medium text-gray-400">London, United Kingdom | Sep 2020 - Jul 2021</span>
+                    </div>
+                    <p class="text-lg text-gray-400 mb-4">Swift Robotics</p>
+                    <ul class="list-disc list-inside space-y-2 text-gray-300 ml-4">
+                        <li>Designed and implemented a <span class="text-accent">ROS-based UV disinfection robot</span> using <span class="text-accent">Intel RealSense D455</span> depth cameras for autonomous room coverage and monitoring.</li>
+                        <li>Worked on 3D mapping, localization, and obstacle avoidance modules leveraging depth maps via <span class="text-accent">Stereo-SGBM and WLS filtering</span>.</li>
+                        <li>Established a secure wireless control system connecting Raspberry Pi nodes to a mobile app for real-time monitoring.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="h-px w-full bg-gray-800 my-16"></div>
+
+        <!-- 5. Projects & Publications Section (ID added here) -->
+        <section id="projects" class="py-12">
+            <h2 class="text-4xl font-bold section-heading mb-12">Key Projects</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1: Person Following Robot -->
+                <div class="card p-6 rounded-xl border border-gray-700" data-aos="flip-left" id="project-ros2">
+                    <h3 class="text-xl font-bold text-accent mb-2 flex items-center"><i data-lucide="route" class="w-5 h-5 mr-2"></i> Person Following Mobile Robot (ROS2)</h3>
+                    <p class="text-sm text-gray-400 mb-4">Sep 2023 - Jan 2024</p>
+                    <p class="text-gray-300 mb-4">A complete <span class="text-accent">ROS2-based system</span> for person following and obstacle avoidance. Utilized <span class="text-accent">Intel RealSense D455</span> for sensor fusion (RGB+Depth), pose estimation, and safety maintenance.</p>
+                    <a href="#" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
+                        <i data-lucide="github" class="w-4 h-4 mr-1"></i> View Code / Details (Link Placeholder)
+                    </a>
+                </div>
+
+                <!-- Project 2: AI Audio-Classification -->
+                <div class="card p-6 rounded-xl border border-gray-700" data-aos="flip-right">
+                    <h3 class="text-xl font-bold text-accent mb-2 flex items-center"><i data-lucide="waves" class="w-5 h-5 mr-2"></i> AI-based Anomaly Detection (Audio)</h3>
+                    <p class="text-sm text-gray-400 mb-4">Dec 2023 - Jan 2024</p>
+                    <p class="text-gray-300 mb-4">Developed an anomaly detection system using <span class="text-accent">autoencoders</span> on audio features. Achieved <span class="text-accent">95.8% accuracy</span> via reconstruction error, ideal for predictive maintenance.</p>
+                    <a href="#" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
+                        <i data-lucide="github" class="w-4 h-4 mr-1"></i> View Code / Details (Link Placeholder)
+                    </a>
+                </div>
+
+                <!-- Project 3: IBM Hack Challenge Winner (Full-Stack) -->
+                <div class="card p-6 rounded-xl border border-gray-700" data-aos="flip-left" data-aos-delay="100">
+                    <h3 class="text-xl font-bold text-accent mb-2 flex items-center"><i data-lucide="award" class="w-5 h-5 mr-2"></i> Winner Project: IBM Hack Challenge</h3>
+                    <p class="text-sm text-gray-400 mb-4">Aug 2021 - Oct 2021</p>
+                    <p class="text-gray-300 mb-4">Developed a web app with an intelligent recommendation engine for OTT platforms, integrating real-time genre analytics and a <span class="text-accent">chatbot with IBM Watson Assistant</span>.</p>
+                    <a href="#" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
+                        <i data-lucide="link" class="w-4 h-4 mr-1"></i> View Demo / Details (Link Placeholder)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Separator -->
+        <div class="h-px w-full bg-gray-800 my-16"></div>
+
+        <!-- 6. Research & Publications Section -->
+        <section id="research" class="py-12">
+            <h2 class="text-4xl font-bold section-heading mb-12">Research & Education</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Publication 1: DTLMV2 -->
+                <div class="card p-6 rounded-xl border border-gray-700" data-aos="fade-up">
+                    <h3 class="text-xl font-bold text-accent mb-2 flex items-center"><i data-lucide="file-text" class="w-5 h-5 mr-2"></i> DTLMV2 - Deep Transfer Learning Mask Classifier (Elsevier)</h3>
+                    <p class="text-sm text-gray-400 mb-4">Published in ELSEVIER - Applied Soft Computing Journal (2022)</p>
+                    <p class="text-gray-300">MobileNet V2 model trained using Imagenet weights on a custom dataset, achieving <span class="text-accent">97% accuracy</span>. Showcases expertise in transfer learning and model validation for real-time systems.</p>
+                    <a href="#" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
+                        <i data-lucide="link" class="w-4 h-4 mr-1"></i> [Full Text/Abstract Link]
+                    </a>
+                </div>
+
+                <!-- Publication 2: DC-DC Converters -->
+                <div class="card p-6 rounded-xl border border-gray-700" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold text-accent mb-2 flex items-center"><i data-lucide="zap" class="w-5 h-5 mr-2"></i> Average model of DC-DC converters</h3>
+                    <p class="text-sm text-gray-400 mb-4">Research Paper (2022)</p>
+                    <p class="text-gray-300">State space analysis of practical DC-DC converters to determine the high gain operating point, considering coil resistance. (Electrical Engineering Background)</p>
+                    <a href="#" class="text-sm font-semibold text-accent hover:underline flex items-center mt-2">
+                        <i data-lucide="link" class="w-4 h-4 mr-1"></i> [Full Text/Abstract Link]
+                    </a>
+                </div>
+                
+                <!-- Education & Certifications Summary -->
+                <div class="card p-6 rounded-xl border border-gray-700 md:col-span-2" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold text-accent mb-2 flex items-center"><i data-lucide="graduation-cap" class="w-5 h-5 mr-2"></i> Education & Certifications</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-4">
+                        <div>
+                            <p class="font-bold text-white">M.Sc. Autonomous Systems</p>
+                            <p class="text-gray-400">Hochschule Bonn-Rhein-Sieg (H-BRS) | Mar 2023 - Present</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-white">B.Tech. Electrical & Electronics Engineering</p>
+                            <p class="text-gray-400">Bharati Vidyapeeth's College of Engineering | 2018-2022</p>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm font-semibold text-gray-300">Key Certifications:</p>
+                    <div class="flex flex-wrap gap-2 mt-1">
+                        <span class="px-2 py-1 text-xs rounded-full bg-blue-900/50 text-blue-300">ML with Python</span>
+                        <span class="px-2 py-1 text-xs rounded-full bg-blue-900/50 text-blue-300">Self-Driving Cars</span>
+                        <span class="px-2 py-1 text-xs rounded-full bg-blue-900/50 text-blue-300">TensorFlow/Deep Learning</span>
+                        <span class="px-2 py-1 text-xs rounded-full bg-blue-900/50 text-blue-300">Generative AI</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-card border-t border-gray-800 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center text-center text-sm text-gray-400">
+            <p>&copy; 2025 Shashwat Pandey. Built with HTML & Tailwind CSS.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="https://linkedin.com/in/shaxpy28" target="_blank" class="hover:text-accent transition duration-150">LinkedIn</a>
+                <a href="mailto:shashwatpandey28@gmail.com" class="hover:text-accent transition duration-150">Email</a>
+                <a href="Personal Portfolio" target="_blank" class="hover:text-accent transition duration-150">Portfolio Link</a>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- CONTACT -->
-<div class="contact" id="contact">
-  <div class="container text-center">
-    <h1>Connect with Me </h1>
-    <!-- <p class="text-center"> Connect with me at<br></p> -->
+    </footer>
 
-  <button type="button" class="btn btn-primary"><a href="https://www.instagram.com/hustlebot_/" target="_blank" rel="noreferrer noopener"><i class="fa fa-instagram"></i> HustleBot!</a></button>
-    <button type="button" class="btn btn-primary"><a href="https://docs.google.com/document/d/1bTOwV3ii0JZlZqO26PKmY8FMWj8qX1yWRYsmaWkmMBA/edit?usp=sharing" target="_blank" rel="noreferrer noopener"><i class="fa fa-download"></i> RESUME</a></button>
-    <div class="row">
-      <div class="col-md-6">
-        <i class="fa fa-phone"></i>
-        <p>9354735519</p>
-      </div>
-      <div class="col-md-6">
-        <i class="fa fa-envelope"></i>
-        <p>shashwatpandey28@gmail.com</p>
-      </div>
-    </div>
+    <!-- Initialize Lucide Icons and Animations -->
+    <script>
+        // Store initial progress values from data-progress attributes
+        const skillProgresses = {};
+        document.querySelectorAll('.skill-progress').forEach(bar => {
+            skillProgresses[bar] = bar.getAttribute('data-progress');
+            bar.style.width = '0%'; // Reset to 0 for initial animation
+        });
 
-  </div>
-</div>
-</section>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+            
+            // Initialize neural network and 3D cube
+            initNeuralNetwork();
+            initThreeJSCube();
+            
+            // Animate skill bars on load
+            animateSkillBars();
+        });
 
-<script src="smooth-scroll.js"></script>
-<script>
-  var scroll=new SmoothScroll('a[href*="#"]');
-</script>
+        // Simple smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                // Check if the anchor is one of the smooth scroll navigation links (starts with #)
+                if (anchor.getAttribute('href').startsWith('#')) {
+                    document.querySelector(anchor.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
 
+        // NEW: Scroll to target and apply visual highlight
+        function scrollToAndHighlightSkill(targetId) {
+            const targetElement = document.getElementById(targetId);
+            if (!targetElement) return;
+
+            // 1. Smooth Scroll
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // 2. Apply Highlight (Class will manage the animation)
+            targetElement.classList.add('highlight-skill');
+
+            // 3. Remove highlight after animation duration (1.5s * 3 flashes = 4.5s)
+            setTimeout(() => {
+                targetElement.classList.remove('highlight-skill');
+            }, 4600); 
+        }
+
+        // Neural Network Animation (Canvas)
+        function initNeuralNetwork() {
+            const canvas = document.getElementById('neuralCanvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Neural network nodes and connections
+            const nodes = [];
+            
+            // Create nodes
+            for (let i = 0; i < 30; i++) {
+                nodes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    radius: Math.random() * 2 + 1
+                });
+            }
+            
+            // Animation loop
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Update nodes
+                nodes.forEach(node => {
+                    node.x += node.vx;
+                    node.y += node.vy;
+                    
+                    // Bounce off walls
+                    if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                    if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+                    
+                    // Draw node
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(20, 184, 166, 0.3)';
+                    ctx.fill();
+                });
+                
+                // Draw connections
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const node1 = nodes[i];
+                        const node2 = nodes[j];
+                        const dx = node1.x - node2.x;
+                        const dy = node1.y - node2.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < 150) {
+                            ctx.beginPath();
+                            ctx.moveTo(node1.x, node1.y);
+                            ctx.lineTo(node2.x, node2.y);
+                            ctx.strokeStyle = `rgba(20, 184, 166, ${0.3 - distance/500})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+        }
+        
+        // Animate skill bars when they come into view
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const progress = entry.target.getAttribute('data-progress');
+                        entry.target.style.width = `${progress}%`;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            skillBars.forEach(bar => {
+                observer.observe(bar);
+            });
+        }
+        
+        // Three.js 3D Rotating Cube Animation
+        function initThreeJSCube() {
+            const container = document.getElementById('cubeContainer');
+            
+            // 1. Scene setup
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            
+            renderer.setSize(120, 120); // Match container size
+            renderer.setClearColor(0x000000, 0); // Transparent background
+            container.appendChild(renderer.domElement);
+            
+            // 2. Object (Cube)
+            const geometry = new THREE.BoxGeometry(1.5, 1.5, 1.5);
+            
+            // Create a custom material matching the accent color
+            const material = new THREE.LineBasicMaterial({
+                color: 0x14B8A6, // Equivalent to #14B8A6 (Teal-500)
+                linewidth: 2 
+            });
+            
+            // Use EdgesGeometry and LineSegments for a proper wireframe effect
+            const edges = new THREE.EdgesGeometry(geometry);
+            const cube = new THREE.LineSegments(edges, material);
+            
+            // 3. Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            
+            // 4. Final Scene Setup
+            scene.add(cube);
+            camera.position.z = 3;
+            
+            // 5. Animation Loop
+            function animateCube() {
+                requestAnimationFrame(animateCube);
+                
+                // Rotate the cube
+                cube.rotation.x += 0.005;
+                cube.rotation.y += 0.007;
+                
+                renderer.render(scene, camera);
+            }
+            
+            animateCube();
+        }
+
+
+
+
+
+            // Add mouse move event listener for 3D effect
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouseX = ((e.clientX - rect.left) / canvas.width - 0.5) * 2;
+                mouseY = ((e.clientY - rect.top) / canvas.height - 0.5) * 2;
+                targetRotationX = mouseY * 15; // Max 15 degree tilt
+                targetRotationY = mouseX * 15;
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                targetRotationX = 0;
+                targetRotationY = 0;
+            });
+
+            let currentAngle = 0;
+            const totalPercentage = 100;
+            
+            // Animation variables
+            let animationProgress = 0;
+            const animationDuration = 1200; // 1.2 seconds
+            
+            // 3D perspective constants
+            const perspective = 800; // Perspective depth
+
+            // Draw the segments with enhanced effects
+            function animatePie(timestamp) {
+                if (!animatePie.startTime) animatePie.startTime = timestamp;
+                const elapsed = timestamp - animatePie.startTime;
+                animationProgress = Math.min(1, elapsed / animationDuration);
+
+                // Smooth rotation interpolation
+                currentRotationX += (targetRotationX - currentRotationX) * 0.1;
+                currentRotationY += (targetRotationY - currentRotationY) * 0.1;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Apply 3D transformation
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.rotate(currentRotationY * Math.PI / 180);
+                ctx.scale(1, Math.cos(currentRotationX * Math.PI / 180));
+                ctx.translate(-centerX, -centerY);
+                
+                currentAngle = 0;
+
+                // Add overall glow effect
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = 'rgba(20, 184, 166, 0.3)';
+
+                pieData.forEach((slice, index) => {
+                    // Calculate angles with padding for separation
+                    const padding = 0.02; // Add small gap between segments
+                    const finalAngle = (slice.percentage / totalPercentage) * (Math.PI * 2 - padding * pieData.length);
+                    const animatedAngle = finalAngle * animationProgress;
+
+                    // Create complex gradient with shimmer
+                    const baseGradient = ctx.createRadialGradient(centerX, centerY, radius * 0.5, centerX, centerY, radius);
+                    baseGradient.addColorStop(0, slice.gradient.start);
+                    baseGradient.addColorStop(0.5, slice.gradient.start);
+                    baseGradient.addColorStop(1, slice.gradient.end);
+
+                    // Add animated shimmer effect
+                    const shimmerPos = (elapsed / 2000 + index / pieData.length) % 1;
+                    const shimmerGradient = ctx.createLinearGradient(
+                        centerX - radius, centerY - radius,
+                        centerX + radius, centerY + radius
+                    );
+                    shimmerGradient.addColorStop(Math.max(0, shimmerPos - 0.1), 'rgba(255, 255, 255, 0)');
+                    shimmerGradient.addColorStop(shimmerPos, 'rgba(255, 255, 255, 0.1)');
+                    shimmerGradient.addColorStop(Math.min(1, shimmerPos + 0.1), 'rgba(255, 255, 255, 0)');
+
+                    ctx.fillStyle = baseGradient;
+                    
+                    // Draw 3D segment with side walls
+                    // Main face
+                    ctx.beginPath();
+                    ctx.moveTo(centerX, centerY);
+                    ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + animatedAngle);
+                    ctx.closePath();
+                    ctx.fill();
+
+                    // Draw side wall for 3D effect
+                    if (animationProgress === 1) {
+                        ctx.beginPath();
+                        ctx.moveTo(centerX + radius * Math.cos(currentAngle), 
+                                 centerY + radius * Math.sin(currentAngle));
+                        ctx.lineTo(centerX + radius * Math.cos(currentAngle), 
+                                 centerY + radius * Math.sin(currentAngle) + slice.height);
+                        ctx.arc(centerX, centerY + slice.height, radius, 
+                              currentAngle, currentAngle + animatedAngle);
+                        ctx.lineTo(centerX + radius * Math.cos(currentAngle + animatedAngle), 
+                                 centerY + radius * Math.sin(currentAngle + animatedAngle));
+                        ctx.closePath();
+                        
+                        // Darker gradient for side
+                        const sideGradient = ctx.createLinearGradient(
+                            centerX, centerY,
+                            centerX, centerY + slice.height
+                        );
+                        sideGradient.addColorStop(0, slice.gradient.end);
+                        sideGradient.addColorStop(1, shadeColor(slice.gradient.end, -30));
+                        ctx.fillStyle = sideGradient;
+                        ctx.fill();
+                    }
+
+                    // Add shimmer overlay
+                    ctx.fillStyle = shimmerGradient;
+                    ctx.fill();
+
+                    currentAngle += finalAngle;
+                    
+                    // Draw text label on the canvas (Donut inner text)
+                    if (animationProgress === 1) {
+                         // Determine mid-point angle for label placement
+                        const midAngle = currentAngle - (finalAngle / 2);
+                        const textX = centerX + Math.cos(midAngle) * (radius / 2);
+                        const textY = centerY + Math.sin(midAngle) * (radius / 2);
+                        
+                        if (slice.percentage >= 10) { // Only draw label if slice is big enough
+                            ctx.fillStyle = '#161b22'; // Dark color for contrast
+                            ctx.font = 'bold 13px Inter, sans-serif';
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'middle';
+                            ctx.fillText(`${slice.percentage}%`, textX, textY);
+                        }
+                    }
+                });
+                
+                // Draw enhanced center hole for donut effect
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius * 0.4, 0, Math.PI * 2);
+                
+                // Create inner gradient for depth effect
+                const innerGradient = ctx.createRadialGradient(
+                    centerX + radius * 0.1, centerY - radius * 0.1, 0,
+                    centerX, centerY, radius * 0.4
+                );
+                innerGradient.addColorStop(0, '#1f2937');
+                innerGradient.addColorStop(0.7, '#161b22');
+                innerGradient.addColorStop(1, '#0d1117');
+                
+                ctx.fillStyle = innerGradient;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                ctx.fill();
+                
+                // Add subtle inner ring
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius * 0.38, 0, Math.PI * 2);
+                ctx.strokeStyle = 'rgba(20, 184, 166, 0.1)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+
+                if (animationProgress < 1) {
+                    requestAnimationFrame(animatePie);
+                } else {
+                    // Once animation is complete, generate the legend HTML
+                    legendContainer.innerHTML = ''; // Clear "Loading" text
+                    pieData.forEach(slice => {
+                        const legendItem = document.createElement('div');
+                        legendItem.className = 'flex items-center';
+                        legendItem.innerHTML = `
+                            <div class="w-3 h-3 rounded-full mr-3 shadow-md" style="background-color: ${slice.jsColor};"></div>
+                            <span class="text-gray-300 font-semibold">${slice.percentage}%</span>
+                            <span class="ml-2 text-gray-400">${slice.label}</span>
+                        `;
+                        legendContainer.appendChild(legendItem);
+                    });
+                }
+            }
+            
+            // Use IntersectionObserver to start the animation when visible
+            const pieObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        requestAnimationFrame(animatePie);
+                        pieObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.5 }); 
+            
+            pieObserver.observe(canvas);
+        }
+
+        // Card interaction effects
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    // Calculate rotation based on mouse position
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateY = ((x - centerX) / centerX) * 5; // Max 5 degree rotation
+                    const rotateX = ((centerY - y) / centerY) * 5;
+
+                    // Update CSS variables for the glow effect
+                    card.style.setProperty('--mouse-x', `${x}px`);
+                    card.style.setProperty('--mouse-y', `${y}px`);
+                    card.style.setProperty('--rotateX', `${rotateX}deg`);
+                    card.style.setProperty('--rotateY', `${rotateY}deg`);
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.setProperty('--rotateX', '0deg');
+                    card.style.setProperty('--rotateY', '0deg');
+                });
+            });
+
+            // Add parallax scrolling effect to section headings
+            const sectionHeadings = document.querySelectorAll('.section-heading');
+            window.addEventListener('scroll', () => {
+                sectionHeadings.forEach(heading => {
+                    const rect = heading.getBoundingClientRect();
+                    const scrolled = window.scrollY;
+                    const rate = scrolled * 0.15;
+                    if(rect.top < window.innerHeight && rect.bottom > 0) {
+                        heading.style.transform = `translateX(${rate}px)`;
+                    }
+                });
+            });
+        });
+        
+    </script>
 </body>
 </html>
-
-
